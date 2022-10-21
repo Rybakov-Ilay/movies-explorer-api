@@ -28,8 +28,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.findUserByCredentials = function (email, password) { // eslint-disable-line
-  return this.findOne({ email }).select('+password').then((user) => { // eslint-disable-line
+userSchema.statics.findUserByCredentials = function (email, password) {
+  return this.findOne({ email }).select('+password').then((user) => {
     if (!user) {
       throw new UnauthorizedError('Неправильные почта или пароль');
     }

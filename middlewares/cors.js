@@ -1,7 +1,7 @@
 // домены, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'http://mesto.ilya.nomoredomains.icu',
-  'https://mesto.ilya.nomoredomains.icu',
+  // 'http://mesto.ilya.nomoredomains.icu',
+  // 'https://mesto.ilya.nomoredomains.icu',
   'http://localhost:3000',
   'https://localhost:3000',
 ];

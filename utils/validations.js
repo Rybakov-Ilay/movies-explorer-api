@@ -30,13 +30,13 @@ module.exports.validateMovie = celebrate({
     movieId: Joi.number().integer().positive().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-  })
+  }),
 });
 
 module.exports.validateMovieDelete = celebrate({
   params: Joi.object().keys({
     _id: Joi.string().length(24).hex().required(),
-  })
+  }),
 });
 
 module.exports.validateUpdateProfile = celebrate({

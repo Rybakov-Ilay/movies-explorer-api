@@ -11,7 +11,7 @@ const cors = require('./middlewares/cors');
 const routes = require('./routes/index');
 const defaultErrorHandler = require('./erorrs/DefaultErorr');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DATABASE_URL } = process.env;
 
 const app = express();
 
@@ -26,9 +26,9 @@ app.use(errors());
 app.use(defaultErrorHandler);
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/moviesdb');
+  await mongoose.connect(DATABASE_URL);
   app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`); // eslint-disable-line
+    console.log(`App listening on port ${PORT}`);
   });
 }
 
