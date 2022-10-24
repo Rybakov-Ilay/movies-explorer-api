@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const { REG_EXP_LINK } = require('./reg-exp');
+const { REG_EXP_LINK } = require('./constants');
 
 module.exports.validateLogin = celebrate({
   body: Joi.object().keys({

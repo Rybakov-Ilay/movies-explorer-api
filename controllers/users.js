@@ -8,12 +8,19 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const { NotFoundError } = require('../erorrs/NotFoundError');
 const { BadRequestError } = require('../erorrs/BadRequestError');
 const { ConflictError } = require('../erorrs/ConflictError');
+const {
+  JWT_DEV_SECRET,
+  CONFLICT_MESSAGE,
+  BAD_REQUEST_MESSAGE,
+  NOT_FOUND_MESSAGE,
+  EXIT,
+} = require('../utils/constants');
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('Пользователь по указанному _id не найден'));
+        next(new NotFoundError(NOT_FOUND_MESSAGE));
       }
       res.send({
         email: user.email,
@@ -22,7 +29,7 @@ module.exports.getUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные'));
+        next(new BadRequestError(BAD_REQUEST_MESSAGE));
       }
       return next(err);
     });
@@ -43,9 +50,9 @@ module.exports.createUser = (req, res, next) => {
         });
       }).catch((err) => {
         if (err.code === 11000) {
-          next(new ConflictError('Пользователь с таким email уже существует'));
+          next(new ConflictError(CONFLICT_MESSAGE));
         } else if (err.name === 'ValidationError') {
-          next(new BadRequestError('Переданы некорректные данные'));
+          next(new BadRequestError(BAD_REQUEST_MESSAGE));
         } else next(err);
       });
   }).catch(next);
@@ -58,7 +65,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV_SECRET,
         { expiresIn: '7d' },
       );
 
@@ -72,7 +79,7 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
-  res.clearCookie('jwt').send({ message: 'Выход' }).catch(next);
+  res.clearCookie('jwt').send({ message: EXIT }).catch(next);
 };
 
 module.exports.updateProfile = (req, res, next) => {
@@ -87,7 +94,7 @@ module.exports.updateProfile = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные'));
+        next(new BadRequestError(BAD_REQUEST_MESSAGE));
       }
       return next(err);
     });

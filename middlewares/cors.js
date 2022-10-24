@@ -1,3 +1,5 @@
+// значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
+const { DEFAULT_ALLOWED_METHODS } = require('../utils/constants');
 // домены, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   // 'http://mesto.ilya.nomoredomains.icu',
@@ -19,8 +21,6 @@ module.exports = (req, res, next) => {
 
   // сохраняем тип запроса (HTTP-метод) в соответствующую переменную
   const { method } = req;
-  // значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   // сохраняем список заголовков исходного запроса
   const requestHeaders = req.headers['access-control-request-headers'];
 

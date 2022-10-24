@@ -4,6 +4,7 @@ const auth = require('../middlewares/auth');
 const { NotFoundError } = require('../erorrs/NotFoundError');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
+const { SERVER_CRASHED, PAGE_NOT_FOUND } = require('../utils/constants');
 const {
   validateAuthentication,
   validateLogin,
@@ -11,7 +12,7 @@ const {
 
 router.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    throw new Error(SERVER_CRASHED);
   }, 0);
 });
 router.post('/signin', validateLogin, login);
@@ -20,6 +21,6 @@ router.get('/signout', logout);
 router.use(auth);
 router.use(usersRouter);
 router.use(moviesRouter);
-router.use((req, res, next) => next(new NotFoundError('По данному пути ничего нет')));
+router.use((req, res, next) => next(new NotFoundError(PAGE_NOT_FOUND)));
 
 module.exports = router;
