@@ -2,8 +2,8 @@
 const { DEFAULT_ALLOWED_METHODS } = require('../utils/constants');
 // домены, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  // 'http://mesto.ilya.nomoredomains.icu',
-  // 'https://mesto.ilya.nomoredomains.icu',
+  'http://movies.ilya.nomoredomains.icu',
+  'https://movies.ilya.nomoredomains.icu',
   'http://localhost:3000',
   'https://localhost:3000',
 ];
