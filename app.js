@@ -10,11 +10,13 @@ const cors = require('./middlewares/cors');
 const routes = require('./routes/index');
 const defaultErrorHandler = require('./erorrs/DefaultErorr');
 const { DATABASE_URL } = require('./utils/constants');
+const limiter = require('./middlewares/limiter');
 
 const { PORT = 3000, DATABASE_PROD_URL, NODE_ENV } = process.env;
 
 const app = express();
 
+app.use(limiter);
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
