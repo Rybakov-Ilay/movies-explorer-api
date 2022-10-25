@@ -15,3 +15,4 @@ module.exports.EXIT = 'Вы вышли';
 module.exports.DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 module.exports.INCORRECT_EMAIL = 'Введите корректный адрес почты';
 module.exports.SERVER_CRASHED = 'Сервер сейчас упадёт';
+module.exports.SERVER_ERROR = 'Ошибка сервера';
