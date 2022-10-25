@@ -96,6 +96,9 @@ module.exports.updateProfile = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError(BAD_REQUEST_MESSAGE));
       }
+      if (err.code === 11000) {
+        next(new ConflictError(CONFLICT_MESSAGE));
+      }
       return next(err);
     });
 };
