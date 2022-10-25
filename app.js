@@ -16,12 +16,12 @@ const { PORT = 3000, DATABASE_PROD_URL, NODE_ENV } = process.env;
 
 const app = express();
 
-app.use(limiter);
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
+app.use(limiter);
 app.use(cors);
 app.use(routes);
 app.use(errorLogger);
