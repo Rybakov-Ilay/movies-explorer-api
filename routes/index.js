@@ -17,8 +17,8 @@ router.get('/crash-test', () => {
 });
 router.post('/signin', validateLogin, login);
 router.post('/signup', validateAuthentication, createUser);
-router.get('/signout', logout);
 router.use(auth);
+router.get('/signout', logout);
 router.use(usersRouter);
 router.use(moviesRouter);
 router.use((req, res, next) => next(new NotFoundError(PAGE_NOT_FOUND)));
