@@ -6,6 +6,8 @@ const allowedCors = [
   'https://movies.ilya.nomoredomains.icu',
   'http://localhost:3000',
   'https://localhost:3000',
+  'http://api.movies.ilya.nomoredomains.icu',
+  'https://api.movies.ilya.nomoredomains.icu'
 ];
 
 module.exports = (req, res, next) => {
