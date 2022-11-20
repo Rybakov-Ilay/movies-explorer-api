@@ -69,19 +69,14 @@ module.exports.login = (req, res, next) => {
         { expiresIn: '7d' },
       );
 
-      res.cookie(
-        'jwt',
-        token,
-        { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true },
-        'Domain=movies.ilya.nomoredomains.icu',
-      ).send({ token });
+      res.send({ token });
     })
     .catch(next);
 };
 
-module.exports.logout = (req, res, next) => {
-  res.clearCookie('jwt').send({ message: EXIT }).catch(next);
-};
+// module.exports.logout = (req, res, next) => {
+//   res.clearCookie('jwt').send({ message: EXIT }).catch(next);
+// };
 
 module.exports.updateProfile = (req, res, next) => {
   const { name, email } = req.body;
