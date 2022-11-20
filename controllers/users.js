@@ -69,9 +69,17 @@ module.exports.login = (req, res, next) => {
         { expiresIn: '7d' },
       );
 
-      res.send({ token });
+      res.cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
+        sameSite: true,
+      }, 'Domain=movies.ilya.nomoredomains.icu').send({ token: req.cookies.jwt });
     })
     .catch(next);
+
+    //   res.send({ token });
+    // })
+    // .catch(next);
 };
 
 module.exports.logout = (req, res, next) => {

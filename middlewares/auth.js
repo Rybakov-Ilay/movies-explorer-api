@@ -6,10 +6,16 @@ const { JWT_SECRET = JWT_DEV_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-  if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
+  // if (!authorization || !authorization.startsWith('Bearer ')) {
+  //   throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
+  // }
+  // const token = authorization.replace('Bearer ', '');
+
+  const token = req.cookies.jwt;
+
+  if (!token) {
+    return next(new UnauthorizedError('Необходима авторизация')); // eslint-disable-line
   }
-  const token = authorization.replace('Bearer ', '');
 
   let payload;
   try {
