@@ -73,6 +73,7 @@ module.exports.login = (req, res, next) => {
         'jwt',
         token,
         { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true },
+        'Domain=movies.ilya.nomoredomains.icu',
       ).send({ token });
     })
     .catch(next);
